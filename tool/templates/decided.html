@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+div.col {
+  border-color: #e3dfde;
+  text-align: center;
+  margin: auto;
+  font-size: 17px;
+}
+div.col a:hover{
+  background-color: #cf8032;
+  padding: 15px;
+  font-size: 17px;
+  color: white;
+}
+table {
+  white-space: nowrap;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+</style>
+  <h4>Title: <u>{{ title|safe }}</u></h4>
+  <h4>Input sequence:</h4>
+  {{ sequence|safe }}<br><br>
+  <h6>Time taken by the program: {{ eta|safe }} mins. <br>The properties of the sequence provided are:</h6>
+    <ul>
+      <li>Number of amino acids: {{ count|safe }}</li>
+      <li>Molecular weight: {{ molwt|safe }} kDa</li>
+      <li>Aromaticity index: {{ arom|safe }}</li>
+      <li>Molar Extinction Coefficient: {{ mec|safe }} M<sup>-1</sup>cm<sup>-1</sup></li>
+      <li>Instability Index: {{ instabdex|safe }} which means your protein is <strong>{{ inststr|safe }}</strong></li>
+      <li>Theoretical Isoelectric point: {{ pi|safe }}</li>
+      <li>The approximate secondary structure composition of the protein: <strong>{{ hel|safe }}</strong>% helical structure, <strong>{{ shet|safe }}</strong>% sheet structure and <strong>{{ turn|safe }}</strong>% turn structure</li>
+    </ul>
+  <div class="col-sm-5">
+    <table class="table table-bordered" border="2">
+      <tr><td style="text-align:center" colspan="5"><strong>Amino acid composition</strong></td></tr>
+      {% for item1, item2, item3, item4, item5 in composition %}
+        <tr>
+          <td>{{ item1|safe }}</td>
+          <td>{{ item2|safe }}</td>
+          <td>{{ item3|safe }}</td>
+          <td>{{ item4|safe }}</td>
+          <td>{{ item5|safe }}</td>
+        </tr>
+      {% endfor %}</table>
+    </div>
+  <br>
+  <h4>We suggest <strong><span style="color:#cf8032">{{ m|safe }}</span></strong> as a way to model the given protein.</h4><br>
+  <h6>There are several tools that can be used for {{ m|safe }}, we recommend the following:</h6>
+  <center><br>
+    <div class="row">
+      <div class="col" id="link">
+        <div class="col">{{ link1|safe }}</div>
+      </div>
+      <div class="col" id="link">
+        <div class="col">{{ link2|safe }}</div>
+      </div>
+      <div class="col" id="link">
+        <div class="col">{{ link3|safe }}</div>
+      </div>
+    </div><br><br>
+    <div class="row">
+      <div class="col" id="link">
+        <div class="col">{{ link4|safe }}</div>
+      </div>
+      <div class="col" id="link">
+        <div class="col">{{ link5|safe }}</div>
+      </div>
+      <div class="col" id="link">
+        <div class="col">{{ link6|safe }}</div>
+      </div>
+    </div>
+  </center><br>
+  <h6>After obtaining a structure please validate them using:</h6>
+  <center><br>
+    <div class="row">
+      <div class="col" id="link">
+        <div class="col"><a href="https://servicesn.mbi.ucla.edu/SAVES/">SAVES</a></div>
+      </div>
+      <div class="col" id="link">
+        <div class="col"><a href="http://iris.physics.iisc.ernet.in/cgi-bin/psap/inputform.pl">PSAP</a></div>
+      </div>
+      <div class="col" id="link">
+        <div class="col"><a href = "http://www.swissparam.ch">SwissParam</a></div>
+      </div>
+    </div><br><br>
+    <div class="row">
+      <div class="col" id="link">
+        <div class="col"><a href = "https://www.ebi.ac.uk/msd-srv/prot_int/cgi-bin/piserver">PDBePISA</a></div>
+      </div>
+      <div class="col" id="link">
+        <div class="col"><a href="http://ekhidna2.biocenter.helsinki.fi/dali/">DALI</a></div>
+      </div>
+      <div class="col" id="link">
+        <div class="col"><a href="http://www.ebi.ac.uk/thornton-srv/databases/ProFunc/">ProFunc</a></div>
+      </div>
+    </div>
+  </center><br>
+  <script>
+  $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();
+  });
+  </script>
+{% endblock %}
