@@ -3,5 +3,5 @@ biopython==1.77
 bs4==0.0.1
 Django==3.0.8
 html5lib==1.1
-mechanize==0.4.5
+mechanize==0.4.6
 whitenoise==5.1.0
